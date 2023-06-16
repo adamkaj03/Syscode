@@ -1,7 +1,12 @@
 package com.inerview.main.repository;
 
+import com.inerview.main.model.Student;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.UUID;
+
 @Repository
-public class StudentRepository {
+public interface StudentRepository extends CrudRepository<Student, UUID> {
+
 }
