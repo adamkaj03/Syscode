@@ -3,6 +3,8 @@ package com.inerview.main.controller;
 import com.inerview.main.model.Student;
 import com.inerview.main.services.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -46,10 +48,16 @@ public class StudentController {
     }
 
     @DeleteMapping("/students/{studentId}")
-    public Student deleteStudent(@PathVariable UUID studentId){
+    public ResponseEntity<String> deleteStudent(@PathVariable UUID studentId){
         Student deletedStudent = studentService.getStudentById(studentId);
-        studentService.deleteById(studentId);
-        return deletedStudent;
+        if(deletedStudent != null){
+            studentService.deleteById(studentId);
+            return ResponseEntity.status(HttpStatus.OK).body("Requested student deleted.");
+        }
+        else{
+
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Requested id not found.");
+        }
     }
 
 }

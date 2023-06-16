@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -26,8 +27,8 @@ public class StudentService {
     }
 
     public Student getStudentById(UUID id){
-        Student returnStudent = studentRepository.findById(id).get();
-        return returnStudent;
+        Optional<Student> studentOptional = studentRepository.findById(id);
+        return studentOptional.orElse(null);
     }
 
     public Student save(Student student){
