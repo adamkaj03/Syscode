@@ -25,6 +25,11 @@ public class StudentService {
         return list;
     }
 
+    public Student getStudentById(UUID id){
+        Student returnStudent = studentRepository.findById(id).get();
+        return returnStudent;
+    }
+
     public Student save(Student student){
         studentRepository.save(student);
         return student;

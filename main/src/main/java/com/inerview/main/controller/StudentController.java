@@ -22,9 +22,20 @@ public class StudentController {
         return lista;
     }
 
-    @PutMapping("/students")
-    public void updateStudent(){
-
+    @PutMapping("/students/{studentId}")
+    public Student updateStudent(@PathVariable UUID studentId, @RequestBody Student student){
+        Student modifiable = studentService.getStudentById(studentId);
+        if(modifiable != null){
+            modifiable.setName(student.getName());
+            modifiable.setEmail(student.getEmail());
+            modifiable.setId(studentId);
+            studentService.deleteById(studentId);
+            studentService.save(modifiable);
+        }
+        else{
+            //hiba
+        }
+        return modifiable;
     }
 
     @PostMapping("/students")
@@ -34,9 +45,11 @@ public class StudentController {
         return student;
     }
 
-    @DeleteMapping("/students")
-    public void deleteStudent(){
-
+    @DeleteMapping("/students/{studentId}")
+    public Student deleteStudent(@PathVariable UUID studentId){
+        Student deletedStudent = studentService.getStudentById(studentId);
+        studentService.deleteById(studentId);
+        return deletedStudent;
     }
 
 }
