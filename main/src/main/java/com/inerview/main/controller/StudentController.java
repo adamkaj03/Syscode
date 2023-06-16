@@ -1,8 +1,11 @@
 package com.inerview.main.controller;
 
+import com.inerview.main.model.Student;
 import com.inerview.main.services.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 @RestController
@@ -13,8 +16,9 @@ public class StudentController {
     private StudentService studentService;
 
     @GetMapping("/students")
-    public String getStudents(){
-        return "Hello";
+    public List<Student> getStudents(){
+        List<Student> lista = studentService.getAllStudent();
+        return lista;
     }
 
     @PutMapping("/update")
