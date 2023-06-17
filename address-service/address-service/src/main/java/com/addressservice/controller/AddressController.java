@@ -1,6 +1,6 @@
-package com.inerview.main.controller;
+package com.addressservice.controller;
 
-import com.inerview.main.model.Address;
+import com.addressservice.model.*;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
