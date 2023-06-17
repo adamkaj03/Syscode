@@ -22,8 +22,8 @@ public class StudentController {
     //az összes tanuló listázása
     @GetMapping("/students")
     public List<Student> getStudents(){
-        List<Student> lista = studentService.getAllStudent();
-        return lista;
+        List<Student> list = studentService.getAllStudent();
+        return list;
     }
 
     //a megadott id-vel rendelkező tanuló módosítása

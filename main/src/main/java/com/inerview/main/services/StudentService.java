@@ -52,6 +52,14 @@ public class StudentService {
         studentRepository.deleteById(id);
     }
 
+    public void deleteAll(){
+        studentRepository.deleteAll();
+    }
+
+    public void saveListStudent(List<Student> list){
+        studentRepository.saveAll(list);
+    }
+
     public boolean isValidEmail(String email){
         return EmailValidator.getInstance().isValid(email);
     }

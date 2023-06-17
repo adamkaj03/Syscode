@@ -11,6 +11,8 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
@@ -22,12 +24,27 @@ class StudentServiceTest {
     @Autowired
     private StudentRepository studentRepository;
     private StudentService underTest;
+    // Privát mező az adatbázis előtti állapot tárolására
+    private List<Student> originalStudents;
 
 
     @BeforeEach
     void setUp(){
         underTest = new StudentService(studentRepository);
+        // Elmentjük az adatbázis aktuális állapotát
+        originalStudents = new ArrayList<>((Collection) studentRepository.findAll());
     }
+
+    // @AfterEach annotációval jelölt metódus az adatbázis visszaállításához
+    @AfterEach
+    void tearDown() {
+        // Töröljük az összes jelenlegi hallgatót az adatbázisból
+        studentRepository.deleteAll();
+        // Visszaállítjuk az adatbázis előtti állapotot
+        studentRepository.saveAll(originalStudents);
+    }
+
+
 
 
     @Test
