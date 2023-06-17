@@ -2,30 +2,24 @@ package com.inerview.main.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.UUID;
 
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 public class Address {
 
     @Id
+    @Getter
+    @Setter
     private UUID id;
 
+    @Getter
+    @Setter
     private String address;
-
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
 }

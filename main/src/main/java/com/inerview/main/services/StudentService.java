@@ -3,6 +3,7 @@ package com.inerview.main.services;
 import com.inerview.main.model.Student;
 import com.inerview.main.repository.StudentRepository;
 import jakarta.transaction.Transactional;
+import org.apache.commons.validator.routines.EmailValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,16 +29,29 @@ public class StudentService {
 
     public Student getStudentById(UUID id){
         Optional<Student> studentOptional = studentRepository.findById(id);
+
+        //ha van ilyen elem, akkor azt a student-et adja vissza
+        //különben null-t
         return studentOptional.orElse(null);
     }
 
     public Student save(Student student){
-        studentRepository.save(student);
-        return student;
+        if(isValidEmail(student.getEmail())){
+            studentRepository.save(student);
+            return student;
+        }
+        else{
+            return null;
+        }
+
     }
 
 
     public void deleteById(UUID id){
         studentRepository.deleteById(id);
+    }
+
+    public boolean isValidEmail(String email){
+        return EmailValidator.getInstance().isValid(email);
     }
 }
