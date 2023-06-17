@@ -3,6 +3,7 @@ package com.inerview.main.services;
 import com.inerview.main.model.Student;
 import com.inerview.main.repository.StudentRepository;
 import jakarta.transaction.Transactional;
+import lombok.AllArgsConstructor;
 import org.apache.commons.validator.routines.EmailValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
+@AllArgsConstructor
 public class StudentService {
 
     @Autowired
@@ -43,7 +45,6 @@ public class StudentService {
         else{
             return null;
         }
-
     }
 
 

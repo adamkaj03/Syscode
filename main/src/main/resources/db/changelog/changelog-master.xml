@@ -14,7 +14,7 @@
             <column name="email" type="VARCHAR(255)"/>
         </createTable>
     </changeSet>
-
+    <!--Kettő teszt példányt felvettem, a könyebb tesztelhetőség miatt-->
     <changeSet id="2" author="adamkaj">
         <insert tableName="student">
             <column name="id" value="fd16a7a5-3e56-4e96-bc14-8f2c1e54e76d"/>
