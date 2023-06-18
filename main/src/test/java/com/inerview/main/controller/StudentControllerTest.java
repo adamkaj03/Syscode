@@ -4,6 +4,7 @@ import com.inerview.main.model.Student;
 import com.inerview.main.services.StudentService;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -94,40 +95,45 @@ class StudentControllerTest {
         verify(studentService, times(1)).save(student);
     }
 
-//    //valamiért ez a teszt nem működik, mert nem rakja bele az elemeket az adatbázisba
-//    @Test
-//    void deleteStudentSuccessTest() {
-//        //a törlendő elem id-je
-//        UUID uuid = UUID.fromString("fd16a7a5-3e56-4e96-bc14-8f2c1e54e76d");
-//
-//        // A studentService.deleteId() metódusának beállítása
-//        doNothing().when(studentService).deleteById(uuid);
-//
-//        //az endpoint meghívása
-//        ResponseEntity<String> response = studentController.deleteStudent(uuid);
-//
-//        // az eredmény ellenőrzése
-//        assertEquals(HttpStatus.OK, response.getStatusCode());
-//        assertEquals("Requested student deleted.", response.getBody());
-//        verify(studentService, times(1)).deleteById(uuid);
-//    }
-//
-//    @Test
-//    void deleteStudentFailTest() {
-//        //a törlendő elem id-je
-//        UUID uuid = UUID.fromString("46d297ee-0a5f-49f6-923e-9c8456771db0");
-//
-//        // A studentService.deleteId() metódusának beállítása
-//        doNothing().when(studentService).deleteById(uuid);
-//
-//        //az endpoint meghívása
-//        ResponseEntity<String> response = studentController.deleteStudent(uuid);
-//
-//        // az eredmény ellenőrzése
-//        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
-//        assertEquals("Can not insert student, because email is invalid.", response.getBody());
-//        verify(studentService, times(1)).deleteById(uuid);
-//    }
+    //valamiért ez a teszt nem működik, mert nem rakja bele az elemeket az adatbázisba
+    @Test
+    @Disabled
+    void deleteStudentSuccessTest() {
+        //a törlendő elem id-je
+        UUID uuid = UUID.fromString("fd16a7a5-3e56-4e96-bc14-8f2c1e54e76d");
+        Student student = new Student(uuid, "Balogh Feri", "adam2000buzas@gmail.com");
+
+        studentController.addStudent(student);
+
+        // A studentService.deleteId() metódusának beállítása
+        doNothing().when(studentService).deleteById(uuid);
+
+        //az endpoint meghívása
+        ResponseEntity<String> response = studentController.deleteStudent(uuid);
+
+        // az eredmény ellenőrzése
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals("Requested student deleted.", response.getBody());
+        verify(studentService, times(1)).deleteById(uuid);
+    }
+
+    @Test
+    void deleteStudentFailTest() {
+        //a törlendő elem id-je
+        UUID uuid = UUID.fromString("46d297ee-0a5f-49f6-923e-9c8456771db0");
+
+
+        // A studentService.deleteId() metódusának beállítása
+        doNothing().when(studentService).deleteById(uuid);
+
+        //az endpoint meghívása
+        ResponseEntity<String> response = studentController.deleteStudent(uuid);
+
+        // az eredmény ellenőrzése
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+        assertEquals("Can not delete student, because there was not in db.", response.getBody());
+        verify(studentService, times(1)).getStudentById(uuid);
+    }
 
 
 }

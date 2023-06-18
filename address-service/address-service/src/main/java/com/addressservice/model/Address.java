@@ -1,14 +1,12 @@
 package com.addressservice.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.UUID;
 
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 public class Address {
 
     @Getter
@@ -18,4 +16,5 @@ public class Address {
     @Getter
     @Setter
     private String address;
+
 }
