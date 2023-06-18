@@ -6,7 +6,7 @@
       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
 
     <changeSet author="adamkaj" id="1">
-        <createTable tableName="student">
+        <createTable tableName="students">
             <column name="id" type="UUID">
                 <constraints nullable="false" primaryKey="true" unique="true"/>
             </column>
@@ -16,12 +16,12 @@
     </changeSet>
     <!--Kettő teszt példányt felvettem, a könyebb tesztelhetőség miatt-->
     <changeSet id="2" author="adamkaj">
-        <insert tableName="student">
+        <insert tableName="students">
             <column name="id" value="fd16a7a5-3e56-4e96-bc14-8f2c1e54e76d"/>
             <column name="name" value="Balogh Anna"/>
             <column name="email" value="anna12@gmail.com"/>
         </insert>
-        <insert tableName="student">
+        <insert tableName="students">
             <column name="id" value="71e8d49c-52b2-4e0f-aecb-c8e6f710d03b"/>
             <column name="name" value="Magyar Balazs"/>
             <column name="email" value="balazs23@gmail.com"/>
